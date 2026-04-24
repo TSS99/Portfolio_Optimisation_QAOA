@@ -59,7 +59,7 @@ source .venv/bin/activate
 Install the required packages:
 
 ```bash
-python -m pip install numpy scipy matplotlib qiskit notebook
+python -m pip install -r requirements.txt
 ```
 
 Start Jupyter Notebook:
