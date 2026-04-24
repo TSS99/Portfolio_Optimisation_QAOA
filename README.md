@@ -80,6 +80,10 @@ Then open:
 Portfolio_Optimisation_QAOA.ipynb
 ```
 
+## Quick Start For Students
+
+If you are opening the project for the first time, run the notebook once without changing anything. After that, change only one variable, such as `q` or one value in `mu`, and run the notebook again. Comparing the two outputs is the easiest way to understand the model.
+
 ## Notebook Walkthrough
 
 The notebook is organized as a step-by-step guide:
