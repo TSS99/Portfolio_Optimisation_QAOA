@@ -21,5 +21,10 @@ Additional reference notes:
 - `visualization-guide.md`
 - `experiments.md`
 - `troubleshooting.md`
+- `faq.md`
+- `common-misconceptions.md`
+- `limitations.md`
+- `extensions.md`
+- `student-checklist.md`
 
 The notebook remains the main source of code. These notes are meant to make the logic easier to revise before a class demo, lab submission, or project presentation.
