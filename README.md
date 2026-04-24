@@ -26,6 +26,7 @@ This is a learning project, not financial advice or a production trading system.
 | `README.md` | Project overview, setup instructions, and beginner notes |
 | `requirements.txt` | Python packages needed to run the notebook |
 | `docs/` | Short supporting notes for revision and presentation prep |
+| `CONTRIBUTING.md` | Guidance for keeping future changes beginner-friendly |
 
 ## Supporting Notes
 
