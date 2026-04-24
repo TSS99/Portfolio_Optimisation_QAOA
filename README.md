@@ -24,6 +24,12 @@ This is a learning project, not financial advice or a production trading system.
 | --- | --- |
 | `Portfolio_Optimisation_QAOA.ipynb` | Main notebook with the full explanation and implementation |
 | `README.md` | Project overview, setup instructions, and beginner notes |
+| `requirements.txt` | Python packages needed to run the notebook |
+| `docs/` | Short supporting notes for revision and presentation prep |
+
+## Supporting Notes
+
+The `docs/` folder breaks the notebook into smaller study notes. Start with `docs/project-overview.md`, then read `docs/portfolio-bitstrings.md`, `docs/markowitz-intuition.md`, and `docs/qaoa-loop.md`.
 
 ## Key Idea
 
