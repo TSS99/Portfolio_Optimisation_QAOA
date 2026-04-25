@@ -45,3 +45,10 @@ Additional reference notes:
 - `reproducibility.md`
 
 The notebook remains the main source of code. These notes are meant to make the logic easier to revise before a class demo, lab submission, or project presentation.
+
+## Recommended Study Paths
+
+- For a quick overview, read `project-overview.md`, `notebook-map.md`, and `reading-results.md`.
+- For the math flow, read `markowitz-intuition.md`, `formula-reading.md`, and `qubo-to-ising.md`.
+- For the QAOA flow, read `cost-hamiltonian.md`, `mixer-hamiltonian.md`, `circuit-steps.md`, and `qaoa-loop.md`.
+- For presentation prep, read `presentation-script.md`, `viva-questions.md`, and `student-checklist.md`.
