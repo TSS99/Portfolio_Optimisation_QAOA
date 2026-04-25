@@ -32,6 +32,14 @@ This is a learning project, not financial advice or a production trading system.
 
 The `docs/` folder breaks the notebook into smaller study notes. Start with `docs/project-overview.md`, then read `docs/portfolio-bitstrings.md`, `docs/markowitz-intuition.md`, and `docs/qaoa-loop.md`.
 
+For classroom use, the most helpful extra files are:
+
+- `docs/mini-lab.md` for a quick hands-on exercise;
+- `docs/study-questions.md` for self-review;
+- `docs/viva-questions.md` for oral exam practice;
+- `docs/report-outline.md` for writing a project report;
+- `docs/grading-rubric.md` for evaluation criteria.
+
 ## Key Idea
 
 Portfolio optimization is about balancing return and risk.
