@@ -1,147 +1,102 @@
-# Portfolio Optimisation using QAOA
+<div align="center">
+  <h1>⚛️ Portfolio Optimisation using QAOA</h1>
+  <p><strong>A beginner-friendly guide to solving financial portfolio optimization using the Quantum Approximate Optimization Algorithm (QAOA) via Qiskit.</strong></p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python Version" />
+    <img src="https://img.shields.io/badge/Qiskit-SDK-purple.svg" alt="Qiskit" />
+    <img src="https://img.shields.io/badge/Algorithm-QAOA-success.svg" alt="QAOA" />
+    <img src="https://img.shields.io/badge/Finance-Portfolio_Optimization-goldenrod.svg" alt="Finance" />
+  </p>
+</div>
 
-This repository contains a beginner-friendly Jupyter Notebook that explains how to solve a small portfolio optimization problem using the Quantum Approximate Optimization Algorithm (QAOA).
+---
 
-Repository link: [TSS99/Portfolio_Optimisation_QAOA](https://github.com/TSS99/Portfolio_Optimisation_QAOA)
+## 🚀 Overview
 
-## What This Project Teaches
+This repository demonstrates how to approach a real-world financial problem—**Portfolio Optimization**—using Quantum Computing. We translate the financial goal of maximizing returns while minimizing risk into a **Quadratic Unconstrained Binary Optimization (QUBO)** model, map it to an **Ising Hamiltonian**, and optimize it using **QAOA**.
 
-The notebook follows one clear chain of logic:
+This is designed as an educational bridge between quantitative finance and quantum algorithms.
 
-1. Start with a simple finance question: which assets should be selected?
-2. Represent each asset decision as a binary value, where `1` means selected and `0` means not selected.
-3. Build a cost function that rewards expected return and penalizes risk.
-4. Convert the binary optimization problem into an Ising Hamiltonian.
-5. Build a QAOA circuit in Qiskit.
-6. Use a classical optimizer to tune the QAOA parameters.
-7. Read the most likely bitstrings as candidate portfolios.
+---
 
-This is a learning project, not financial advice or a production trading system.
+## 🧮 The Mathematical Foundation
 
-## Repository Contents
+### 1. The Portfolio Objective
 
-| File | Purpose |
+We want to decide which assets to include in our portfolio. Let our decision be a binary vector $x \in \{0, 1\}^n$:
+- $x_i = 1$ (Select asset $i$)
+- $x_i = 0$ (Do not select asset $i$)
+
+Given expected returns $\mu$, a covariance (risk) matrix $\Sigma$, and a risk-aversion factor $q$, we want to minimize our risk while maximizing our expected return. 
+
+$$ \min_{x \in \{0,1\}^n} \frac{q}{2} x^T \Sigma x - \mu^T x $$
+
+### 2. Ising Hamiltonian Mapping
+
+Quantum computers operate on qubits, whose states can be measured as $+1$ or $-1$ (eigenvalues of the Pauli-Z operator). We convert our binary variables $x_i \in \{0, 1\}$ into spin variables $Z_i \in \{1, -1\}$ using the substitution:
+
+$$ x_i = \frac{1 - Z_i}{2} $$
+
+Substituting this into our QUBO gives us the **Cost Hamiltonian** ($H_C$). The lowest energy state (ground state) of this Hamiltonian corresponds to the optimal portfolio.
+
+### 3. The QAOA Approach
+
+**QAOA** (Quantum Approximate Optimization Algorithm) is a hybrid quantum-classical algorithm. It uses two Hamiltonians:
+
+1. **Cost Hamiltonian ($H_C$)**: Encodes our portfolio optimization problem.
+2. **Mixer Hamiltonian ($H_M$)**: Flips qubit states to allow the algorithm to explore the solution space.
+
+$$ H_M = \sum_{i=1}^n X_i $$
+
+The QAOA circuit alternates between applying $H_C$ and $H_M$ over $p$ layers, parameterized by angles $\gamma$ and $\beta$. A classical optimizer (like COBYLA) tweaks these angles until the expectation value $\langle \psi | H_C | \psi \rangle$ is minimized.
+
+---
+
+## 💻 Repository Structure
+
+| File / Folder | Purpose |
 | --- | --- |
-| `Portfolio_Optimisation_QAOA.ipynb` | Main notebook with the full explanation and implementation |
-| `README.md` | Project overview, setup instructions, and beginner notes |
-| `requirements.txt` | Python packages needed to run the notebook |
-| `docs/` | Short supporting notes for revision and presentation prep |
-| `CONTRIBUTING.md` | Guidance for keeping future changes beginner-friendly |
+| 📓 `Portfolio_Optimisation_QAOA.ipynb` | **Main Notebook:** The full step-by-step implementation. |
+| 📄 `README.md` | Project overview and mathematical foundation. |
+| 📦 `requirements.txt` | Python dependencies. |
+| 📚 `docs/` | Supporting study notes and classroom resources. |
 
-## Supporting Notes
+---
 
-The `docs/` folder breaks the notebook into smaller study notes. Start with `docs/project-overview.md`, then read `docs/portfolio-bitstrings.md`, `docs/markowitz-intuition.md`, and `docs/qaoa-loop.md`.
+## 🛠️ Quick Start
 
-For classroom use, the most helpful extra files are:
-
-- `docs/mini-lab.md` for a quick hands-on exercise;
-- `docs/study-questions.md` for self-review;
-- `docs/viva-questions.md` for oral exam practice;
-- `docs/report-outline.md` for writing a project report;
-- `docs/grading-rubric.md` for evaluation criteria.
-
-## Key Idea
-
-Portfolio optimization is about balancing return and risk.
-
-In this notebook:
-
-- `mu` stores the expected return of each asset.
-- `Sigma` stores the covariance matrix, which describes risk and how assets move together.
-- `q` controls risk aversion.
-- A bitstring such as `101` represents a portfolio choice.
-
-For a three-asset example:
-
-- `000` means no assets are selected.
-- `001` means only the first asset is selected.
-- `101` means the first and third assets are selected.
-- `111` means all assets are selected.
-
-Qiskit prints bitstrings with qubit 0 on the right, and this notebook maps qubit 0 to asset 1.
-
-QAOA searches over these bitstrings and tries to place higher probability on lower-cost portfolios.
-
-## Setup
-
-Create and activate a virtual environment:
-
+**1. Create a virtual environment & install dependencies:**
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-Install the required packages:
-
+**2. Launch Jupyter Notebook:**
 ```bash
-python -m pip install -r requirements.txt
+jupyter notebook Portfolio_Optimisation_QAOA.ipynb
 ```
 
-Start Jupyter Notebook:
+**3. Experiment!**
+Try modifying the mock data in the notebook:
+- Change the `q` (risk aversion) factor. Higher $q$ means the algorithm prioritizes low risk. Lower $q$ means it chases higher returns.
+- Change the expected returns vector $\mu$.
+- Adjust the number of QAOA layers (`p_layers`).
 
-```bash
-jupyter notebook
-```
+---
 
-Then open:
+## 📊 Interpreting Results
+
+Once the classical optimizer finishes tuning the QAOA circuit, measuring the circuit produces a probability distribution over all possible portfolios (bitstrings).
 
 ```text
-Portfolio_Optimisation_QAOA.ipynb
-```
-
-## Quick Start For Students
-
-If you are opening the project for the first time, run the notebook once without changing anything. After that, change only one variable, such as `q` or one value in `mu`, and run the notebook again. Comparing the two outputs is the easiest way to understand the model.
-
-## Notebook Walkthrough
-
-The notebook is organized as a step-by-step guide:
-
-1. Mathematical formulation of the portfolio problem.
-2. QUBO and Ising mapping.
-3. Package imports.
-4. Mock financial data generation.
-5. Cost Hamiltonian construction.
-6. QAOA concept introduction.
-7. Mixer Hamiltonian construction.
-8. Parameterized QAOA circuit creation.
-9. Expectation value calculation.
-10. Classical optimizer setup.
-11. QAOA optimization loop.
-12. Portfolio probability extraction.
-13. Visualization and conclusion.
-
-## How To Read The Output
-
-After optimization, the notebook prints the most probable portfolios. Each portfolio is shown as a bitstring.
-
-Example:
-
-```text
+Top Portfolios by Probability:
 Portfolio 101 : 32.50%
 ```
 
-This means the optimized circuit outputs `101` with about `32.50%` probability. In a three-asset setup, that bitstring means selecting asset 1 and asset 3.
+In this 3-asset example, the bitstring `101` means that **Asset 1 and Asset 3** were selected, offering the best mathematical balance of return and risk based on our inputs!
 
-The bar chart at the end shows the same probabilities visually. Higher bars indicate portfolios that QAOA favors more strongly.
-
-## Things To Experiment With
-
-Students can modify these values to understand the algorithm better:
-
-- Change `mu` to test different expected returns.
-- Change `Sigma` to test different risk relationships.
-- Change `q` to make the optimizer more or less risk-averse.
-- Change `p_layers` to add or remove QAOA layers.
-- Change `maxiter` to let the classical optimizer search longer.
-
-## Important Limitations
-
-This notebook intentionally keeps the problem small and readable.
-
-- It uses only three mock assets.
-- It uses a statevector simulator, not real quantum hardware.
-- It does not include constraints such as budget, minimum return, or selecting exactly `k` assets.
-- The highest-probability bitstring is a candidate solution, not a guaranteed global optimum.
-
-These simplifications make the project easier to understand before moving to larger and more realistic portfolio optimization problems.
+<div align="center">
+  <i>"Quantum optimization isn't about finding the perfect answer immediately, it's about shifting the probability landscape so the best answers are the easiest to find."</i>
+</div>
